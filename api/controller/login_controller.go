@@ -5,9 +5,9 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/bootstrap"
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/domain"
 	"github.com/gin-gonic/gin"
+	"github.com/hongdangcseiu/go-back-end/bootstrap"
+	"github.com/hongdangcseiu/go-back-end/domain"
 )
 
 type LoginController struct {

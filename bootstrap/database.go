@@ -3,10 +3,9 @@ package bootstrap
 import (
 	"context"
 	"fmt"
+	"github.com/hongdangcseiu/go-back-end/mongo"
 	"log"
 	"time"
-
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/mongo"
 )
 
 func NewMongoDatabase(env *Env) mongo.Client {
@@ -18,7 +17,7 @@ func NewMongoDatabase(env *Env) mongo.Client {
 	dbUser := env.DBUser
 	dbPass := env.DBPass
 
-	mongodbURI := fmt.Sprintf("mongodb://%s:%s@%s:%s", dbUser, dbPass, dbHost, dbPort)
+	mongodbURI := fmt.Sprintf("mongodb+srv://%s:%s@%s:%s", dbUser, dbPass, dbHost, dbPort)
 
 	if dbUser == "" || dbPass == "" {
 		mongodbURI = fmt.Sprintf("mongodb://%s:%s", dbHost, dbPort)
@@ -40,6 +39,7 @@ func NewMongoDatabase(env *Env) mongo.Client {
 	}
 
 	return client
+
 }
 
 func CloseMongoDBConnection(client mongo.Client) {

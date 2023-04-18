@@ -3,13 +3,13 @@ package route
 import (
 	"time"
 
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/api/controller"
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/bootstrap"
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/domain"
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/mongo"
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/repository"
-	"github.com/amitshekhariitbhu/go-backend-clean-architecture/usecase"
 	"github.com/gin-gonic/gin"
+	"github.com/hongdangcseiu/go-back-end/api/controller"
+	"github.com/hongdangcseiu/go-back-end/bootstrap"
+	"github.com/hongdangcseiu/go-back-end/domain"
+	"github.com/hongdangcseiu/go-back-end/mongo"
+	"github.com/hongdangcseiu/go-back-end/repository"
+	"github.com/hongdangcseiu/go-back-end/usecase"
 )
 
 func NewProfileRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database, group *gin.RouterGroup) {
