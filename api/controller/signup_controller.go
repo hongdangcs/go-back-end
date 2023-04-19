@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -25,8 +26,19 @@ func (sc *SignupController) Signup(c *gin.Context) {
 	}
 
 	_, err = sc.SignupUsecase.GetUserByEmail(c, request.Email)
+	log.Print("check email")
 	if err == nil {
+		log.Print("exists email")
 		c.JSON(http.StatusConflict, domain.ErrorResponse{Message: "User already exists with the given email"})
+		return
+	}
+
+	_, err = sc.SignupUsecase.GetUserByUserName(c, request.UserName)
+	log.Print("check username")
+	log.Print("error: ", err)
+	if err == nil {
+		log.Print("exists username")
+		c.JSON(http.StatusConflict, domain.ErrorResponse{Message: "User name already exists!"})
 		return
 	}
 
@@ -46,6 +58,7 @@ func (sc *SignupController) Signup(c *gin.Context) {
 		Name:     request.Name,
 		Email:    request.Email,
 		Password: request.Password,
+		UserName: request.UserName,
 	}
 
 	err = sc.SignupUsecase.Create(c, &user)

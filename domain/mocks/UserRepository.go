@@ -4,6 +4,7 @@ package mocks
 
 import (
 	context "context"
+	"log"
 
 	domain "github.com/hongdangcseiu/go-back-end/domain"
 	mock "github.com/stretchr/testify/mock"
@@ -53,6 +54,7 @@ func (_m *UserRepository) Fetch(c context.Context) ([]domain.User, error) {
 
 // GetByEmail provides a mock function with given fields: c, email
 func (_m *UserRepository) GetByEmail(c context.Context, email string) (domain.User, error) {
+	log.Print("UserRepository.GetByEmail called... ")
 	ret := _m.Called(c, email)
 
 	var r0 domain.User
@@ -74,6 +76,7 @@ func (_m *UserRepository) GetByEmail(c context.Context, email string) (domain.Us
 
 // GetByID provides a mock function with given fields: c, id
 func (_m *UserRepository) GetByID(c context.Context, id string) (domain.User, error) {
+	log.Print("UserRepository.GetByID called... ")
 	ret := _m.Called(c, id)
 
 	var r0 domain.User
@@ -86,6 +89,27 @@ func (_m *UserRepository) GetByID(c context.Context, id string) (domain.User, er
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
 		r1 = rf(c, id)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+func (_m *UserRepository) GetByUserName(c context.Context, username string) (domain.User, error) {
+	log.Print("UserRepository.GetByUserName called... ")
+	ret := _m.Called(c, username)
+
+	var r0 domain.User
+	if rf, ok := ret.Get(0).(func(context.Context, string) domain.User); ok {
+		r0 = rf(c, username)
+	} else {
+		r0 = ret.Get(0).(domain.User)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
+		r1 = rf(c, username)
 	} else {
 		r1 = ret.Error(1)
 	}

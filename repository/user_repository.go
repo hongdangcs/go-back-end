@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"log"
 
 	"github.com/hongdangcseiu/go-back-end/domain"
 	"github.com/hongdangcseiu/go-back-end/mongo"
@@ -51,6 +52,7 @@ func (ur *userRepository) Fetch(c context.Context) ([]domain.User, error) {
 }
 
 func (ur *userRepository) GetByEmail(c context.Context, email string) (domain.User, error) {
+	log.Print("user_repository.GetByEmail handler...")
 	collection := ur.database.Collection(ur.collection)
 	var user domain.User
 	err := collection.FindOne(c, bson.M{"email": email}).Decode(&user)
@@ -68,5 +70,12 @@ func (ur *userRepository) GetByID(c context.Context, id string) (domain.User, er
 	}
 
 	err = collection.FindOne(c, bson.M{"_id": idHex}).Decode(&user)
+	return user, err
+}
+func (ur *userRepository) GetByUserName(c context.Context, username string) (domain.User, error) {
+	log.Print("user_repository.GetByUserName handler...")
+	collection := ur.database.Collection(ur.collection)
+	var user domain.User
+	err := collection.FindOne(c, bson.M{"username": username}).Decode(&user)
 	return user, err
 }
