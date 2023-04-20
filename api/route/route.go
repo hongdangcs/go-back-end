@@ -29,4 +29,6 @@ func Setup(env *bootstrap.Env, timeout time.Duration, db mongo.Database, gin *gi
 
 	//my edit
 	NewPostRouter(env, timeout, db, protectedRouter)
+	EditUserRouter(env, timeout, db, protectedRouter)
+	EditPostRouter(env, timeout, db, protectedRouter)
 }

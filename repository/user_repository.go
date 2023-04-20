@@ -79,3 +79,26 @@ func (ur *userRepository) GetUserByUserName(c context.Context, username string) 
 	err := collection.FindOne(c, bson.M{"username": username}).Decode(&user)
 	return user, err
 }
+
+func (ur *userRepository) UpdateUser(c context.Context, user domain.User) error {
+	collection := ur.database.Collection(ur.collection)
+
+	filter := bson.M{"_id": user.ID}
+	log.Print("postrepository.edit: ", filter)
+	update := bson.M{
+		"$set": bson.M{
+			"name":         user.Name,
+			"bio":          user.Bio,
+			"profile_pic":  user.ProfilePic,
+			"social_media": user.SocialMedia,
+		},
+	}
+	log.Print("userrepository.edit: update:", update)
+
+	_, err := collection.UpdateOne(c, filter, update)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

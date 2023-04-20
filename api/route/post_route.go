@@ -20,6 +20,7 @@ func GetPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database,
 	group.GET("/post/:id", pc.GetPostById)
 	group.GET("/post/", pc.GetPost)
 	group.GET("/post/user/:id", pc.GetPostByUserId)
+	group.GET("/category/:category", pc.GetPostByCategory)
 
 }
 
@@ -30,4 +31,13 @@ func NewPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database,
 		Env:          env,
 	}
 	group.POST("/post/new", pc.Create)
+}
+
+func EditPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database, group *gin.RouterGroup) {
+	pr := repository.NewPostRepository(db, domain.CollectionPost)
+	pc := &controller.PostController{
+		PostUsercase: usecase.NewPostUsecase(pr, timeout),
+		Env:          env,
+	}
+	group.PUT("/post/:id", pc.Edit)
 }
