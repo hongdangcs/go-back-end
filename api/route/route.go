@@ -18,7 +18,7 @@ func Setup(env *bootstrap.Env, timeout time.Duration, db mongo.Database, gin *gi
 
 	//my edit
 	GetPostRouter(env, timeout, db, publicRouter)
-	//UserRouter(env, timeout, db, pulicRouter)
+	GetUserRouter(env, timeout, db, publicRouter)
 
 	protectedRouter := gin.Group("")
 	// Middleware to verify AccessToken

@@ -11,7 +11,7 @@ type postUsecase struct {
 	contextTimeout time.Duration
 }
 
-func NewPostUsecase(postRepository domain.PostUsecase, timeout time.Duration) domain.PostUsecase {
+func NewPostUsecase(postRepository domain.PostRepository, timeout time.Duration) domain.PostUsecase {
 	return &postUsecase{
 		postRepository: postRepository,
 		contextTimeout: timeout,

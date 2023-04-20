@@ -53,8 +53,8 @@ func (_m *UserRepository) Fetch(c context.Context) ([]domain.User, error) {
 }
 
 // GetByEmail provides a mock function with given fields: c, email
-func (_m *UserRepository) GetByEmail(c context.Context, email string) (domain.User, error) {
-	log.Print("UserRepository.GetByEmail called... ")
+func (_m *UserRepository) GetUserByEmail(c context.Context, email string) (domain.User, error) {
+	log.Print("UserRepository.GetUserByEmail called... ")
 	ret := _m.Called(c, email)
 
 	var r0 domain.User
@@ -75,8 +75,8 @@ func (_m *UserRepository) GetByEmail(c context.Context, email string) (domain.Us
 }
 
 // GetByID provides a mock function with given fields: c, id
-func (_m *UserRepository) GetByID(c context.Context, id string) (domain.User, error) {
-	log.Print("UserRepository.GetByID called... ")
+func (_m *UserRepository) GetUserByID(c context.Context, id string) (domain.User, error) {
+	log.Print("UserRepository.GetUserByID called... ")
 	ret := _m.Called(c, id)
 
 	var r0 domain.User
@@ -96,8 +96,8 @@ func (_m *UserRepository) GetByID(c context.Context, id string) (domain.User, er
 	return r0, r1
 }
 
-func (_m *UserRepository) GetByUserName(c context.Context, username string) (domain.User, error) {
-	log.Print("UserRepository.GetByUserName called... ")
+func (_m *UserRepository) GetUserByUserName(c context.Context, username string) (domain.User, error) {
+	log.Print("UserRepository.GetUserByUserName called... ")
 	ret := _m.Called(c, username)
 
 	var r0 domain.User

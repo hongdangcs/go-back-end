@@ -13,7 +13,7 @@ import (
 
 func GetPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database, group *gin.RouterGroup) {
 	pr := repository.NewPostRepository(db, domain.CollectionPost)
-	pc := controller.PostController{
+	pc := &controller.PostController{
 		PostUsercase: usecase.NewPostUsecase(pr, timeout),
 		Env:          env,
 	}
@@ -25,7 +25,7 @@ func GetPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database,
 
 func NewPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database, group *gin.RouterGroup) {
 	pr := repository.NewPostRepository(db, domain.CollectionPost)
-	pc := controller.PostController{
+	pc := &controller.PostController{
 		PostUsercase: usecase.NewPostUsecase(pr, timeout),
 		Env:          env,
 	}

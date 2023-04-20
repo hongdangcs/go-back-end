@@ -51,15 +51,15 @@ func (ur *userRepository) Fetch(c context.Context) ([]domain.User, error) {
 	return users, err
 }
 
-func (ur *userRepository) GetByEmail(c context.Context, email string) (domain.User, error) {
-	log.Print("user_repository.GetByEmail handler...")
+func (ur *userRepository) GetUserByEmail(c context.Context, email string) (domain.User, error) {
+	log.Print("user_repository.GetUserByEmail handler...")
 	collection := ur.database.Collection(ur.collection)
 	var user domain.User
 	err := collection.FindOne(c, bson.M{"email": email}).Decode(&user)
 	return user, err
 }
 
-func (ur *userRepository) GetByID(c context.Context, id string) (domain.User, error) {
+func (ur *userRepository) GetUserByID(c context.Context, id string) (domain.User, error) {
 	collection := ur.database.Collection(ur.collection)
 
 	var user domain.User
@@ -72,8 +72,8 @@ func (ur *userRepository) GetByID(c context.Context, id string) (domain.User, er
 	err = collection.FindOne(c, bson.M{"_id": idHex}).Decode(&user)
 	return user, err
 }
-func (ur *userRepository) GetByUserName(c context.Context, username string) (domain.User, error) {
-	log.Print("user_repository.GetByUserName handler...")
+func (ur *userRepository) GetUserByUserName(c context.Context, username string) (domain.User, error) {
+	log.Print("user_repository.GetUserByUserName handler...")
 	collection := ur.database.Collection(ur.collection)
 	var user domain.User
 	err := collection.FindOne(c, bson.M{"username": username}).Decode(&user)
