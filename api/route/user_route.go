@@ -20,3 +20,13 @@ func GetUserRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database,
 	group.GET("/user/:username", uc.GetUserByUserName)
 
 }
+
+func EditUserRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database, group *gin.RouterGroup) {
+	ur := repository.NewUserRepository(db, domain.CollectionUser)
+	uc := &controller.UserController{
+		UserUsecase: usecase.NewUserUsecase(ur, timeout),
+		Env:         env,
+	}
+	group.PUT("/user/", uc.EditUser)
+
+}

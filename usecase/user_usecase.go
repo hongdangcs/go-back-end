@@ -23,3 +23,32 @@ func (uu userUsecase) GetUserByUserName(c context.Context, userID string) (domai
 	defer cancel()
 	return uu.userRepository.GetUserByUserName(ctx, userID)
 }
+
+func (uu *userUsecase) EditUser(c context.Context, userID string, name string, bio string, profilePic string, socialMedia string) error {
+	ctx, cancel := context.WithTimeout(c, uu.contextTimeout)
+	defer cancel()
+	user, err := uu.userRepository.GetUserByID(c, userID)
+	if err != nil {
+		return err
+	}
+
+	if name != "" {
+		user.Name = name
+	}
+	if bio != "" {
+		user.Bio = bio
+	}
+	if profilePic != "" {
+		user.ProfilePic = profilePic
+	}
+	if socialMedia != "" {
+		user.SocialMedia = socialMedia
+	}
+
+	err = uu.userRepository.UpdateUser(ctx, user)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

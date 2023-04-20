@@ -18,6 +18,12 @@ func NewPostUsecase(postRepository domain.PostRepository, timeout time.Duration)
 	}
 }
 
+func (pu *postUsecase) Edit(c context.Context, postId string, post *domain.Post) error {
+	ctx, cancel := context.WithTimeout(c, pu.contextTimeout)
+	defer cancel()
+	return pu.postRepository.Edit(ctx, postId, post)
+}
+
 func (pu *postUsecase) Create(c context.Context, post *domain.Post) error {
 	ctx, cancel := context.WithTimeout(c, pu.contextTimeout)
 	defer cancel()
@@ -40,4 +46,10 @@ func (pu *postUsecase) GetPostByID(c context.Context, postId string) (domain.Pos
 	ctx, cancel := context.WithTimeout(c, pu.contextTimeout)
 	defer cancel()
 	return pu.postRepository.GetPostByID(ctx, postId)
+}
+
+func (pu *postUsecase) GetPostByCategory(c context.Context, category string) ([]domain.Post, error) {
+	ctx, cancel := context.WithTimeout(c, pu.contextTimeout)
+	defer cancel()
+	return pu.postRepository.GetPostByCategory(ctx, category)
 }
