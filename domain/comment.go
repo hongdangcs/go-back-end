@@ -20,6 +20,7 @@ type Comment struct {
 type CommentRepository interface {
 	Create(c context.Context, comment *Comment) error
 	Edit(c context.Context, commentID string, comment *Comment) error
+	GetCommentByID(c context.Context, postID string) (Comment, error)
 	GetCommentByPostID(c context.Context, postID string) ([]Comment, error)
 	Delete(c context.Context, comment *Comment) error
 }
@@ -27,6 +28,7 @@ type CommentRepository interface {
 type CommentUsecase interface {
 	Create(c context.Context, comment *Comment) error
 	Edit(c context.Context, commentID string, comment *Comment) error
+	GetCommentByID(c context.Context, postID string) (Comment, error)
 	GetCommentByPostID(c context.Context, postID string) ([]Comment, error)
 	Delete(c context.Context, comment *Comment) error
 }

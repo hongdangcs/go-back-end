@@ -65,3 +65,54 @@ func (cc *CommentController) GetCommentByPostID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, comments)
 }
+func (cc *CommentController) Delete(c *gin.Context) {
+	userID := c.GetString("x-user-id")
+	commentID := c.Param("id")
+
+	commentToDelete, err := cc.CommentUsercase.GetCommentByID(c, commentID)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Comment not found"})
+		return
+	}
+
+	if commentToDelete.UserID.Hex() != userID {
+		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: "Not Authorized!!! "})
+		return
+	}
+
+	if err := cc.CommentUsercase.Delete(c, &commentToDelete); err != nil {
+		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Post Delete successfully"})
+}
+
+func (cc *CommentController) Edit(c *gin.Context) {
+	userID := c.GetString("x-user-id")
+	commentID := c.Param("id")
+
+	var comment domain.Comment
+	if err := c.BindJSON(&comment); err != nil {
+		c.JSON(http.StatusBadRequest, domain.ErrorResponse{Message: err.Error()})
+		return
+	}
+
+	commentToEdit, err := cc.CommentUsercase.GetCommentByID(c, commentID)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Comment not found"})
+		return
+	}
+
+	if commentToEdit.UserID.Hex() != userID {
+		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: "Not Authorized!!! "})
+		return
+	}
+
+	if err := cc.CommentUsercase.Edit(c, commentID, &comment); err != nil {
+		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Comment updated successfully"})
+}

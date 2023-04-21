@@ -41,3 +41,9 @@ func (c2 *commentUsecase) Delete(c context.Context, comment *domain.Comment) err
 	defer cancel()
 	return c2.commentRepository.Delete(ctx, comment)
 }
+
+func (c2 *commentUsecase) GetCommentByID(c context.Context, commentID string) (domain.Comment, error) {
+	ctx, cancel := context.WithTimeout(c, c2.contextTimeout)
+	defer cancel()
+	return c2.commentRepository.GetCommentByID(ctx, commentID)
+}

@@ -24,7 +24,7 @@ type PostRepository interface {
 	Create(c context.Context, post *Post) error
 	Edit(c context.Context, postID string, post *Post) error
 	GetPost(c context.Context) ([]Post, error)
-	GetPostByID(c context.Context, postID string) (Post, error)
+	GetPostByID(c context.Context, commentID string) (Post, error)
 	GetPostByUserID(c context.Context, userID string) ([]Post, error)
 	GetPostByCategory(c context.Context, category string) ([]Post, error)
 	Delete(c context.Context, post *Post) error

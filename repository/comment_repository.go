@@ -13,6 +13,17 @@ type commentRepository struct {
 	collection string
 }
 
+func (c2 *commentRepository) GetCommentByID(c context.Context, commentID string) (domain.Comment, error) {
+	collection := c2.database.Collection(c2.collection)
+	var comment domain.Comment
+	idHex, err := primitive.ObjectIDFromHex(commentID)
+	if err != nil {
+		return comment, err
+	}
+	err = collection.FindOne(c, bson.M{"_id": idHex}).Decode(&comment)
+	return comment, err
+}
+
 func (c2 *commentRepository) Create(c context.Context, comment *domain.Comment) error {
 	collection := c2.database.Collection(c2.collection)
 	_, err := collection.InsertOne(c, comment)
