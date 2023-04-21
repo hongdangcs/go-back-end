@@ -145,3 +145,28 @@ func (u *PostController) GetPostByCategory(c *gin.Context) {
 
 	c.JSON(http.StatusOK, posts)
 }
+
+func (pc *PostController) Delete(c *gin.Context) {
+	userID := c.GetString("x-user-id")
+	postID := c.Param("id")
+
+	postToDelete, err := pc.PostUsercase.GetPostByID(c, postID)
+	log.Print("get post by id: ", postID)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
+		return
+	}
+
+	if postToDelete.UserID.Hex() != userID {
+		log.Print(userID, " edit: ", postToDelete.UserID.Hex())
+		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: "Not Authorized!!! "})
+		return
+	}
+
+	if err := pc.PostUsercase.Delete(c, &postToDelete); err != nil {
+		c.JSON(http.StatusInternalServerError, domain.ErrorResponse{Message: err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Post Delete successfully"})
+}

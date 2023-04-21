@@ -129,3 +129,12 @@ func (pr *postRepository) GetPostByCategory(c context.Context, category string) 
 
 	return posts, err
 }
+func (pr *postRepository) Delete(c context.Context, post *domain.Post) error {
+	collection := pr.database.Collection(pr.collection)
+
+	_, err := collection.DeleteOne(c, post)
+	if err != nil {
+		return err
+	}
+	return nil
+}

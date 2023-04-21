@@ -40,4 +40,5 @@ func EditPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database
 		Env:          env,
 	}
 	group.PUT("/post/:id", pc.Edit)
+	group.DELETE("/delete/:id", pc.Delete)
 }

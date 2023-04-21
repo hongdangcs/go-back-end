@@ -19,6 +19,7 @@ func Setup(env *bootstrap.Env, timeout time.Duration, db mongo.Database, gin *gi
 	//my edit
 	GetPostRouter(env, timeout, db, publicRouter)
 	GetUserRouter(env, timeout, db, publicRouter)
+	GetCommentByPostID(env, timeout, db, publicRouter)
 
 	protectedRouter := gin.Group("")
 	// Middleware to verify AccessToken
@@ -31,4 +32,5 @@ func Setup(env *bootstrap.Env, timeout time.Duration, db mongo.Database, gin *gi
 	NewPostRouter(env, timeout, db, protectedRouter)
 	EditUserRouter(env, timeout, db, protectedRouter)
 	EditPostRouter(env, timeout, db, protectedRouter)
+	CreateComment(env, timeout, db, protectedRouter)
 }
