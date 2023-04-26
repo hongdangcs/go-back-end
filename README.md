@@ -47,7 +47,7 @@ cd your-workspace
 git clone https://github.com/hongdangcseiu/go-back-end.git
 
 # Move to the project root directory
-cd go-backend-clean-architecture
+cd go-back-end
 ```
 
 #### Run without Docker
