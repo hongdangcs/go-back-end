@@ -1,28 +1,3 @@
-# Go Backend Clean Architecture
-
-A Go (Golang) Backend Clean Architecture project with Gin, MongoDB, JWT Authentication Middleware, Test, and Docker.
-
-![Go Backend Clean Architecture](https://github.com/amitshekhariitbhu/go-backend-clean-architecture/blob/main/assets/go-backend-clean-architecture.png?raw=true)
-
-**You can use this project as a template to build your Backend project in the Go language on top of this project.**
-
-Before creating this project, I have gone through more than 20 projects related to the Go(Golang) Clean Architecture on GitHub.
-
-Thanks to all those projects, I learned a lot from all of those. As I keep saying:
-
-> The best way to learn to code is to code. But, to write good code, you will also have to read good code. Make a habit of reading good code. You can find many open-source projects on GitHub and start reading.
-
-Then for the implementation part, I combined all of my ideas, experiences, and learnings from those projects to create this project.
-
-And as always I would love to get feedback on my project. This helps everyone and most importantly me.
-
-Learn about this project architecture in detail from the blogs mentioned below:
-
-- [Go Backend Clean Architecture](https://amitshekhar.me/blog/go-backend-clean-architecture)
-- [Go JWT Authentication Middleware](https://amitshekhar.me/blog/go-jwt-authentication-middleware)
-- [Configuration with Viper in Go](https://amitshekhar.me/blog/configuration-with-viper-in-go)
-- [Test with Testify and Mockery in Go](https://amitshekhar.me/blog/test-with-testify-and-mockery-in-go)
-
 ## Architecture Layers of the project
 
 - Router
@@ -33,23 +8,15 @@ Learn about this project architecture in detail from the blogs mentioned below:
 
 ![Go Backend Clean Architecture Diagram](https://github.com/amitshekhariitbhu/go-backend-clean-architecture/blob/main/assets/go-backend-arch-diagram.png?raw=true)
 
-## About me
-
-Hi, I am [**Amit Shekhar**](https://amitshekhar.me), I have mentored many developers, and their efforts landed them high-paying tech jobs, helped many tech companies in solving their unique problems, and created many open-source libraries being used by top companies. I am passionate about sharing knowledge through open-source, blogs, and videos.
-
-You can connect with me on:
-
-- [Twitter](https://twitter.com/amitiitbhu)
-- [YouTube](https://www.youtube.com/@amitshekhar)
-- [LinkedIn](https://www.linkedin.com/in/amit-shekhar-iitbhu)
-- [GitHub](https://github.com/amitshekhariitbhu)
-
 ## Major Packages used in this project
 
-- **gin**: Gin is an HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need a smashing performance, get yourself some Gin.
+- **gin**: Gin is an HTTP web framework written in Go (Golang). It features a Martini-like API with much better
+  performance -- up to 40 times faster. If you need a smashing performance, get yourself some Gin.
 - **mongo go driver**: The Official Golang driver for MongoDB.
-- **jwt**: JSON Web Tokens are an open, industry-standard RFC 7519 method for representing claims securely between two parties. Used for Access Token and Refresh Token.
-- **viper**: For loading configuration from the `.env` file. Go configuration with fangs. Find, load, and unmarshal a configuration file in JSON, TOML, YAML, HCL, INI, envfile, or Java properties formats.
+- **jwt**: JSON Web Tokens are an open, industry-standard RFC 7519 method for representing claims securely between two
+  parties. Used for Access Token and Refresh Token.
+- **viper**: For loading configuration from the `.env` file. Go configuration with fangs. Find, load, and unmarshal a
+  configuration file in JSON, TOML, YAML, HCL, INI, envfile, or Java properties formats.
 - **bcrypt**: Package bcrypt implements Provos and Mazières's bcrypt adaptive hashing algorithm.
 - **testify**: A toolkit with common assertions and mocks that plays nicely with the standard library.
 - **mockery**: A mock code autogenerator for Golang used in testing.
@@ -67,7 +34,8 @@ You can connect with me on:
 
 ### How to run this project?
 
-We can run this Go Backend Clean Architecture project with or without Docker. Here, I am providing both ways to run this project.
+We can run this Go Backend Clean Architecture project with or without Docker. Here, I am providing both ways to run this
+project.
 
 - Clone this project
 
@@ -76,7 +44,7 @@ We can run this Go Backend Clean Architecture project with or without Docker. He
 cd your-workspace
 
 # Clone this project into your workspace
-git clone https://github.com/amitshekhariitbhu/go-backend-clean-architecture.git
+git clone https://github.com/hongdangcseiu/go-back-end.git
 
 # Move to the project root directory
 cd go-backend-clean-architecture
@@ -87,7 +55,8 @@ cd go-backend-clean-architecture
 - Create a file `.env` similar to `.env.example` at the root directory with your configuration.
 - Install `go` if not installed on your machine.
 - Install `MongoDB` if not installed on your machine.
-- Important: Change the `DB_HOST` to `localhost` (`DB_HOST=localhost`) in `.env` configuration file. `DB_HOST=mongodb` is needed only when you run with Docker.
+- Important: Change the `DB_HOST` to `localhost` (`DB_HOST=localhost`) in `.env` configuration file. `DB_HOST=mongodb`
+  is needed only when you run with Docker.
 - Run `go run cmd/main.go`.
 - Access API using `http://localhost:8080`
 
@@ -117,7 +86,8 @@ mockery --dir=domain --output=domain/mocks --outpkg=mocks --all
 mockery --dir=mongo --output=mongo/mocks --outpkg=mocks --all
 ```
 
-Whenever you make changes in the interfaces of these use-cases, repositories, or databases, you need to run the corresponding command to regenerate the mock code for testing.
+Whenever you make changes in the interfaces of these use-cases, repositories, or databases, you need to run the
+corresponding command to regenerate the mock code for testing.
 
 ### The Complete Project Folder Structure
 
@@ -131,7 +101,9 @@ Whenever you make changes in the interfaces of these use-cases, repositories, or
 │   │   ├── profile_controller_test.go
 │   │   ├── refresh_token_controller.go
 │   │   ├── signup_controller.go
-│   │   └── task_controller.go
+│   │   ├── user_controller.go
+│   │   ├── comment_controller.go
+│   │   └── post_controller.go
 │   ├── middleware
 │   │   └── jwt_auth_middleware.go
 │   └── route
@@ -140,7 +112,9 @@ Whenever you make changes in the interfaces of these use-cases, repositories, or
 │       ├── refresh_token_route.go
 │       ├── route.go
 │       ├── signup_route.go
-│       └── task_route.go
+│       ├── user_route.go
+│       ├── comment_route.go
+│       └── post_route.go
 ├── bootstrap
 │   ├── app.go
 │   ├── database.go
@@ -156,7 +130,8 @@ Whenever you make changes in the interfaces of these use-cases, repositories, or
 │   ├── refresh_token.go
 │   ├── signup.go
 │   ├── success_response.go
-│   ├── task.go
+│   ├── comment.go
+│   ├── post.go
 │   └── user.go
 ├── go.mod
 ├── go.sum
@@ -166,38 +141,38 @@ Whenever you make changes in the interfaces of these use-cases, repositories, or
 ├── mongo
 │   └── mongo.go
 ├── repository
-│   ├── task_repository.go
+│   ├── comment_repository.go
+│   ├── post_repository.go
 │   ├── user_repository.go
 │   └── user_repository_test.go
 └── usecase
     ├── login_usecase.go
+    ├── comment_usecase.go
+    ├── post_usecase.go
     ├── profile_usecase.go
     ├── refresh_token_usecase.go
     ├── signup_usecase.go
-    ├── task_usecase.go
-    └── task_usecase_test.go
+    └── user_usecase.go
 ```
-
-### API documentation of Go Backend Clean Architecture
-
-<a href="https://documenter.getpostman.com/view/391588/2s8Z75S9xy" target="_blank">
-    <img alt="View API Doc Button" src="https://github.com/amitshekhariitbhu/go-backend-clean-architecture/blob/main/assets/button-view-api-docs.png?raw=true" width="200" height="60"/>
-</a>
 
 ### Example API Request and Response
 
-- signup
+- Signup
 
-  - Request
+    - Request
 
   ```
-  curl --location --request POST 'http://localhost:8080/signup' \
-  --data-urlencode 'email=test@gmail.com' \
-  --data-urlencode 'password=test' \
-  --data-urlencode 'name=Test Name'
+  fetch('http://localhost:8080/api/signup', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: 'email=test@gmail.com&password=test&name=Test%20Name'
+  }
+  )
   ```
 
-  - Response
+    - Response
 
   ```json
   {
@@ -206,17 +181,22 @@ Whenever you make changes in the interfaces of these use-cases, repositories, or
   }
   ```
 
-- login
+- Login
 
-  - Request
+    - Request
 
   ```
-  curl --location --request POST 'http://localhost:8080/login' \
-  --data-urlencode 'email=test@gmail.com' \
-  --data-urlencode 'password=test'
+  fetch('http://localhost:8080/api/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: 'email=test@gmail.com&password=test'
+  }
+  )
   ```
 
-  - Response
+    - Response
 
   ```json
   {
@@ -225,16 +205,21 @@ Whenever you make changes in the interfaces of these use-cases, repositories, or
   }
   ```
 
-- profile
+- Profile
 
-  - Request
+    - Request
 
   ```
-  curl --location --request GET 'http://localhost:8080/profile' \
-  --header 'Authorization: Bearer access_token'
+  fetch('http://localhost:8080/api/profile', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer access_token'
+  }
+  }
+  )
   ```
 
-  - Response
+    - Response
 
   ```json
   {
@@ -243,73 +228,110 @@ Whenever you make changes in the interfaces of these use-cases, repositories, or
   }
   ```
 
-- task create
+- Blog post
+    - Create a blog post
 
-  - Request
+        - Request
 
-  ```
-  curl --location --request POST 'http://localhost:8080/task' \
-  --header 'Authorization: Bearer access_token' \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data-urlencode 'title=Test Task'
-  ```
+      ```
+      fetch('http://localhost:8080/api/post/new', {method: 'POST',  headers: {
+        'Authorization': 'Bearer access_token',
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },  
+      body: 'title=Blog title&content=Blog content'  
+      }
+      )
+      ```
 
-  - Response
+        - Response
 
-  ```json
-  {
-    "message": "Task created successfully"
-  }
-  ```
+      ```json
+      {  
+      "message": "Post created successfully"  
+      }
+      ``` 
+    - Get all blog post
 
-- task fetch
+        - Request
 
-  - Request
+      ```
+      fetch('http://localhost:8080/api/post', 
+      {
+      method: 'GET'
+      }
+      )
+      ```
 
-  ```
-  curl --location --request GET 'http://localhost:8080/task' \
-  --header 'Authorization: Bearer access_token'
-  ```
+    - Get a blog post by ID
 
-  - Response
+        - Request
 
-  ```json
-  [
-    {
-      "title": "Test Task"
-    },
-    {
-      "title": "Test Another Task"
-    }
-  ]
-  ```
+      ```
+      fetch('http://localhost:8080/api/post/:id', 
+      {
+      method: 'GET',
+      }
+      )
+      ```
 
-- refresh token
+        - Response
 
-  - Request
+      ```json
+      {
+        "title": "Post title",
+        "userID": "user id",
+        "content": "Post content",
+        "date_create": "",
+        "date_update": "",
+        "categories": [],
+        "approved": ""
+        }
+      ``` 
+- Comment
+    - Create a comment
 
-  ```
-  curl --location --request POST 'http://localhost:8080/refresh' \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data-urlencode 'refreshToken=refresh_token'
-  ```
+        - Request
 
-  - Response
+      ```
+      fetch('http://localhost:8080/api/comment/:postID', {method: 'POST',  headers: {
+        'Authorization': 'Bearer access_token',
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },  
+      body: 'content=Comment content'  
+      }
+      )
+      ```
 
-  ```json
-  {
-    "accessToken": "access_token",
-    "refreshToken": "refresh_token"
-  }
-  ```
+        - Response
 
-### TODO
+      ```json
+      {  
+      "message": "Comment created successfully"  
+      }
+      ``` 
+    - Get all comment of a blog post
 
-- Improvement based on feedback.
-- Add more test cases.
-- Always try to update with the latest version of the packages used.
+        - Request
 
-## If this project helps you in anyway, show your love ❤️ by putting a ⭐ on this project ✌️
+      ```
+      fetch('http://localhost:8080/api/comment/post/:postId', 
+      {
+      method: 'GET'
+      }
+      )
+      ```
+        - Response
+
+      ```json
+      [
+      {
+          "userID": "user id",
+          "postID": "post id",
+          "content": "comment content",
+          "date_create": "date"
+      }
+      ]
+      ``` 
 
 ### License
 
@@ -328,7 +350,3 @@ Whenever you make changes in the interfaces of these use-cases, repositories, or
    See the License for the specific language governing permissions and
    limitations under the License.
 ```
-
-### Contributing to Go Backend Clean Architecture
-
-All pull requests are welcome.
