@@ -18,5 +18,5 @@ func NewRefreshTokenRouter(env *bootstrap.Env, timeout time.Duration, db mongo.D
 		RefreshTokenUsecase: usecase.NewRefreshTokenUsecase(ur, timeout),
 		Env:                 env,
 	}
-	group.POST("/refresh", rtc.RefreshToken)
+	group.POST("/api/refresh", rtc.RefreshToken)
 }

@@ -17,10 +17,11 @@ func GetPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database,
 		PostUsercase: usecase.NewPostUsecase(pr, timeout),
 		Env:          env,
 	}
-	group.GET("/post/:id", pc.GetPostById)
-	group.GET("/post/", pc.GetPost)
-	group.GET("/post/user/:id", pc.GetPostByUserId)
-	group.GET("/category/:category", pc.GetPostByCategory)
+	group.GET("/api/post/:id", pc.GetPostById)
+	group.GET("/api/post/", pc.GetPost)
+	group.GET("/api/post/user/:id", pc.GetPostByUserId)
+	group.GET("/api/post/category/:category", pc.GetPostByCategory)
+	group.GET("/api/post/search/:query", pc.Search)
 
 }
 
@@ -30,7 +31,7 @@ func NewPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database,
 		PostUsercase: usecase.NewPostUsecase(pr, timeout),
 		Env:          env,
 	}
-	group.POST("/post/new", pc.Create)
+	group.POST("/api/post/new", pc.Create)
 }
 
 func EditPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database, group *gin.RouterGroup) {
@@ -39,6 +40,6 @@ func EditPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database
 		PostUsercase: usecase.NewPostUsecase(pr, timeout),
 		Env:          env,
 	}
-	group.PUT("/post/:id", pc.Edit)
-	group.DELETE("/delete/:id", pc.Delete)
+	group.PUT("/api/post/:id", pc.Edit)
+	group.DELETE("/api/delete/:id", pc.Delete)
 }

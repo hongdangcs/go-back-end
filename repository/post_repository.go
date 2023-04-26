@@ -58,6 +58,31 @@ func (pr *postRepository) Create(c context.Context, post *domain.Post) error {
 	return err
 }
 
+func (pr *postRepository) Search(c context.Context, query string) ([]domain.Post, error) {
+	collection := pr.database.Collection(pr.collection)
+	var posts []domain.Post
+
+	pattern := bson.M{"$regex": primitive.Regex{Pattern: query, Options: "i"}}
+
+	filter := bson.M{"$or": []bson.M{
+		{"title": pattern},
+		{"content": pattern},
+	}}
+
+	cursor, err := collection.Find(c, filter)
+	if err != nil {
+		return nil, err
+	}
+
+	err = cursor.All(c, &posts)
+	if err != nil {
+		return nil, err
+	}
+
+	return posts, nil
+
+}
+
 func (pr *postRepository) GetPost(c context.Context) ([]domain.Post, error) {
 	collection := pr.database.Collection(pr.collection)
 

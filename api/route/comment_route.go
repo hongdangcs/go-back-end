@@ -17,7 +17,7 @@ func GetCommentByPostID(env *bootstrap.Env, timeout time.Duration, db mongo.Data
 		CommentUsercase: usecase.NewCommentUsecase(cr, timeout),
 		Env:             env,
 	}
-	group.GET("/comment/post/:id", cc.GetCommentByPostID)
+	group.GET("/api/comment/post/:id", cc.GetCommentByPostID)
 
 }
 
@@ -27,8 +27,8 @@ func EditComment(env *bootstrap.Env, timeout time.Duration, db mongo.Database, g
 		CommentUsercase: usecase.NewCommentUsecase(cr, timeout),
 		Env:             env,
 	}
-	group.POST("/comment/:postID", cc.Create)
-	group.DELETE("/comment/:id", cc.Delete)
-	group.PUT("/comment/:id", cc.Edit)
+	group.POST("/api/comment/:postID", cc.Create)
+	group.DELETE("/api/comment/:id", cc.Delete)
+	group.PUT("/api/comment/:id", cc.Edit)
 
 }

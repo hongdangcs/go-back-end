@@ -123,6 +123,20 @@ func (u *PostController) GetPostById(c *gin.Context) {
 	c.JSON(http.StatusOK, post)
 }
 
+func (u *PostController) Search(c *gin.Context) {
+
+	query := c.Param("query")
+
+	posts, err := u.PostUsercase.Search(c, query)
+	log.Print("postcontroller search for: ", query)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, posts)
+}
+
 func (u *PostController) GetPost(c *gin.Context) {
 
 	posts, err := u.PostUsercase.GetPost(c)

@@ -30,6 +30,12 @@ func (pu *postUsecase) Edit(c context.Context, postId string, post *domain.Post)
 	return pu.postRepository.Edit(ctx, postId, post)
 }
 
+func (pu *postUsecase) Search(c context.Context, query string) ([]domain.Post, error) {
+	ctx, cancel := context.WithTimeout(c, pu.contextTimeout)
+	defer cancel()
+	return pu.postRepository.Search(ctx, query)
+}
+
 func (pu *postUsecase) GetPostByUserID(c context.Context, userID string) ([]domain.Post, error) {
 	ctx, cancel := context.WithTimeout(c, pu.contextTimeout)
 	defer cancel()
