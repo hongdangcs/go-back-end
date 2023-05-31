@@ -25,15 +25,12 @@ func NewUserRepository(db mongo.Database, collection string) domain.UserReposito
 
 func (ur *userRepository) Create(c context.Context, user *domain.User) error {
 	collection := ur.database.Collection(ur.collection)
-
 	_, err := collection.InsertOne(c, user)
-
 	return err
 }
 
 func (ur *userRepository) Fetch(c context.Context) ([]domain.User, error) {
 	collection := ur.database.Collection(ur.collection)
-
 	opts := options.Find().SetProjection(bson.D{{Key: "password", Value: 0}})
 	cursor, err := collection.Find(c, bson.D{}, opts)
 
@@ -42,7 +39,6 @@ func (ur *userRepository) Fetch(c context.Context) ([]domain.User, error) {
 	}
 
 	var users []domain.User
-
 	err = cursor.All(c, &users)
 	if users == nil {
 		return []domain.User{}, err

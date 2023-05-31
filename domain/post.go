@@ -10,7 +10,7 @@ const (
 )
 
 type Post struct {
-	ID                  primitive.ObjectID `bson:"_id" json:"-"`
+	ID                  primitive.ObjectID `bson:"_id" json:"id"`
 	Title               string             `bson:"title" form:"title" binding:"required" json:"title"`
 	UserID              primitive.ObjectID `bson:"userID" json:"userID"`
 	Content             string             `bson:"content" form:"content" binding:"required" json:"content"`

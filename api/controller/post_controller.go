@@ -23,9 +23,7 @@ func (pc *PostController) Create(c *gin.Context) {
 	}
 
 	userID := c.GetString("x-user-id")
-
 	timeString := bootstrap.GetTimeNow()
-
 	post := domain.Post{
 		ID:         primitive.NewObjectID(),
 		Title:      request.Title,

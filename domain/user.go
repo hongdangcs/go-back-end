@@ -42,5 +42,6 @@ type UserRepository interface {
 
 type UserUsecase interface {
 	GetUserByUserName(c context.Context, id string) (User, error)
+	GetUserByUserId(c context.Context, id string) (User, error)
 	EditUser(c context.Context, id string, name string, bio string, pic string, media string) error
 }

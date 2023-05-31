@@ -17,5 +17,5 @@ func NewProfileRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Databa
 	pc := &controller.ProfileController{
 		ProfileUsecase: usecase.NewProfileUsecase(ur, timeout),
 	}
-	group.GET("/api/profile", pc.Fetch)
+	group.GET("/api/profile/", pc.Fetch)
 }

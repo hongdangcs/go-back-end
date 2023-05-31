@@ -18,5 +18,5 @@ func NewSignupRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Databas
 		SignupUsecase: usecase.NewSignupUsecase(ur, timeout),
 		Env:           env,
 	}
-	group.POST("/api/signup", sc.Signup)
+	group.POST("/api/signup/", sc.Signup)
 }

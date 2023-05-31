@@ -24,6 +24,12 @@ func (uu userUsecase) GetUserByUserName(c context.Context, userID string) (domai
 	return uu.userRepository.GetUserByUserName(ctx, userID)
 }
 
+func (uu userUsecase) GetUserByUserId(c context.Context, id string) (domain.User, error) {
+	ctx, cancel := context.WithTimeout(c, uu.contextTimeout)
+	defer cancel()
+	return uu.userRepository.GetUserByID(ctx, id)
+}
+
 func (uu *userUsecase) EditUser(c context.Context, userID string, name string, bio string, profilePic string, socialMedia string) error {
 	ctx, cancel := context.WithTimeout(c, uu.contextTimeout)
 	defer cancel()

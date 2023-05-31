@@ -3,8 +3,10 @@ package domain
 import "context"
 
 type Profile struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	UserName string `json:"username"`
+	Bio      string `json:"bio"`
 }
 
 type ProfileUsecase interface {

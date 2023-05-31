@@ -19,9 +19,27 @@ func main() {
 
 	timeout := time.Duration(env.ContextTimeout) * time.Second
 
-	gin := gin.Default()
+	ginr := gin.Default()
 
-	route.Setup(env, timeout, db, gin)
+	ginr.Use(CORSMiddleware())
 
-	gin.Run(env.ServerAddress)
+	route.Setup(env, timeout, db, ginr)
+
+	ginr.Run(env.ServerAddress)
+}
+
+func CORSMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
 }

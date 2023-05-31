@@ -17,7 +17,8 @@ func GetUserRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database,
 		UserUsecase: usecase.NewUserUsecase(ur, timeout),
 		Env:         env,
 	}
-	group.GET("/api/user/:username", uc.GetUserByUserName)
+	group.GET("/api/user/:username/", uc.GetUserByUserName)
+	group.GET("/api/user/id/:id/", uc.GetUserByUserId)
 
 }
 

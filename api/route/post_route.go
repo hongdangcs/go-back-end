@@ -17,11 +17,11 @@ func GetPostRouter(env *bootstrap.Env, timeout time.Duration, db mongo.Database,
 		PostUsercase: usecase.NewPostUsecase(pr, timeout),
 		Env:          env,
 	}
-	group.GET("/api/post/:id", pc.GetPostById)
+	group.GET("/api/post/:id/", pc.GetPostById)
 	group.GET("/api/post/", pc.GetPost)
-	group.GET("/api/post/user/:id", pc.GetPostByUserId)
-	group.GET("/api/post/category/:category", pc.GetPostByCategory)
-	group.GET("/api/post/search/:query", pc.Search)
+	group.GET("/api/post/user/:id/", pc.GetPostByUserId)
+	group.GET("/api/post/category/:category/", pc.GetPostByCategory)
+	group.GET("/api/post/search/:query/", pc.Search)
 
 }
 

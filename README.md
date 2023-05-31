@@ -67,28 +67,6 @@ cd go-back-end
 - Run `docker-compose up -d`.
 - Access API using `http://localhost:8080`
 
-### How to run the test?
-
-```bash
-# Run all tests
-go test ./...
-```
-
-### How to generate the mock code?
-
-In this project, to test, we need to generate mock code for the use-case, repository, and database.
-
-```bash
-# Generate mock code for the usecase and repository
-mockery --dir=domain --output=domain/mocks --outpkg=mocks --all
-
-# Generate mock code for the database
-mockery --dir=mongo --output=mongo/mocks --outpkg=mocks --all
-```
-
-Whenever you make changes in the interfaces of these use-cases, repositories, or databases, you need to run the
-corresponding command to regenerate the mock code for testing.
-
 ### The Complete Project Folder Structure
 
 ```

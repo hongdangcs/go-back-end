@@ -54,6 +54,23 @@ func (uc *UserController) GetUserByUserName(c *gin.Context) {
 		SocialMedia: user.SocialMedia})
 }
 
+func (uc *UserController) GetUserByUserId(c *gin.Context) {
+
+	username := c.Param("id")
+
+	user, err := uc.UserUsecase.GetUserByUserId(c, username)
+	if err != nil {
+		c.JSON(http.StatusNotFound, domain.ErrorResponse{Message: "User not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, domain.User{Name: user.Name,
+		Bio:         user.Bio,
+		UserName:    user.UserName,
+		ProfilePic:  user.ProfilePic,
+		SocialMedia: user.SocialMedia})
+}
+
 func (uc *UserController) EditUser(c *gin.Context) {
 	userID := c.GetString("x-user-id")
 
